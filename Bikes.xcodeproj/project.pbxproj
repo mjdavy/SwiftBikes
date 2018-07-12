@@ -15,6 +15,7 @@
 		4014BC8420F4F906008228A4 /* BikesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC8320F4F906008228A4 /* BikesTests.swift */; };
 		4014BC8F20F4F906008228A4 /* BikesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC8E20F4F906008228A4 /* BikesUITests.swift */; };
 		4014BC9D20F7A570008228A4 /* BikeNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC9C20F7A570008228A4 /* BikeNetworks.swift */; };
+		4014BCA020F7C28C008228A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4014BC9F20F7C28C008228A4 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		4014BC8E20F4F906008228A4 /* BikesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikesUITests.swift; sourceTree = "<group>"; };
 		4014BC9020F4F906008228A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4014BC9C20F7A570008228A4 /* BikeNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeNetworks.swift; sourceTree = "<group>"; };
+		4014BC9F20F7C28C008228A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4014BCA020F7C28C008228A4 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				4014BC8220F4F906008228A4 /* BikesTests */,
 				4014BC8D20F4F906008228A4 /* BikesUITests */,
 				4014BC6C20F4F904008228A4 /* Products */,
+				4014BC9E20F7C28C008228A4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +130,14 @@
 				4014BC9020F4F906008228A4 /* Info.plist */,
 			);
 			path = BikesUITests;
+			sourceTree = "<group>";
+		};
+		4014BC9E20F7C28C008228A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4014BC9F20F7C28C008228A4 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +208,11 @@
 				TargetAttributes = {
 					4014BC6A20F4F904008228A4 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					4014BC7E20F4F906008228A4 = {
 						CreatedOnToolsVersion = 9.4.1;

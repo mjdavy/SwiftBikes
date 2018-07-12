@@ -20,29 +20,88 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        enableLocationServices()
         centerMapOnLocation(location: lindenCottage)
         bikeNetworks.startLoad();
         startReceivingLocationChanges()
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func enableLocationServices()
+    {
+        locationManager.delegate = self
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            //disableMyLocationBasedFeatures()
+            break
+            
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            //enableMyWhenInUseFeatures()
+            break
+            
+        case .authorizedAlways:
+            // Enable any of your app's location features
+            //enableMyAlwaysFeatures()
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
+    {
+        switch status {
+            case .restricted, .denied:
+                // Disable your app's location features
+                //disableMyLocationBasedFeatures()
+                break
+            
+            case .authorizedWhenInUse:
+                // Enable only your app's when-in-use features.
+                //enableMyWhenInUseFeatures()
+                break
+            
+            case .authorizedAlways:
+                // Enable any of your app's location services.
+                //enableMyAlwaysFeatures()
+                break
+            
+            case .notDetermined:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
         centerMapOnLocation(location: locations.last!)
     }
     
-    func startReceivingLocationChanges() {
+    func startReceivingLocationChanges()
+    {
         let authorizationStatus = CLLocationManager.authorizationStatus()
-        if authorizationStatus != .authorizedWhenInUse && authorizationStatus != .authorizedAlways {
+        if authorizationStatus != .authorizedWhenInUse && authorizationStatus != .authorizedAlways
+        {
             // User has not authorized access to location information.
             return
         }
         // Do not start services that aren't available.
-        if !CLLocationManager.locationServicesEnabled() {
+        if !CLLocationManager.locationServicesEnabled()
+        {
             // Location services is not available.
             return
         }
@@ -53,7 +112,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(location: CLLocation)
+    {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
