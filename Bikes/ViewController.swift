@@ -14,20 +14,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let bikeNetworks = BikeNetworks()
     let locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 1000
-    let lindenCottage = CLLocation(latitude: 51.093482, longitude: 0.038469)
+    var locationEstablished = false
     
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         enableLocationServices()
-        centerMapOnLocation(location: lindenCottage)
-        bikeNetworks.startLoad();
+        mapView.showsUserLocation = true
         startReceivingLocationChanges()
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        
     }
 
     override func didReceiveMemoryWarning()
@@ -88,7 +83,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        centerMapOnLocation(location: locations.last!)
+        if (!locationEstablished)
+        {
+            let currentLocation = locations.last!
+            let lat = currentLocation.coordinate.latitude
+            let long = currentLocation.coordinate.longitude
+            centerMapOnLocation(location: currentLocation)
+            bikeNetworks.startLoad(completionHandler: {(networks) in
+                if (networks != nil) {
+                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: networks!!, lat: lat, long: long)
+                    let (id,href) = myNetwork
+                    print(href,id)
+                }
+                
+                
+            })
+        }
+        
+        locationEstablished = true;
     }
     
     func startReceivingLocationChanges()
