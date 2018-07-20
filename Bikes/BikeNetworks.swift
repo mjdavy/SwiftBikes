@@ -9,38 +9,108 @@
 import Foundation
 import MapKit
 
+
+struct Network : Codable {
+    let company : [String]
+    let href : String
+    let id: String
+    let location : Location
+    let name : String
+}
+
+struct Location : Codable {
+    let city : String
+    let country : String
+    let latitude : Double
+    let longitude : Double
+}
+
+struct Networks : Codable {
+    let networks: [Network]
+}
+
+
+
 class BikeNetworks {
 
-    func startLoad(url: URL, completionHandler: @escaping (NSDictionary??) -> Void) {
+    func startLoad(url: URL, completionHandler: @escaping ([String:Network]?) -> Void) {
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            let result = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary
-            completionHandler(result)
+            
+            if let error = error {
+                self.handleClientError(error: error)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                (200...299).contains(httpResponse.statusCode) else {
+                    self.handleServerError(response: response)
+                    return
+            }
+            
+            
+            if let string = String(data: data!, encoding: .utf8)
+            {
+                print(string)
+            }
+            
+            let deser = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+            print(deser!)
+            
+            
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                let result = try jsonDecoder.decode([String:Network].self, from: data!)
+                completionHandler(result)
+            }
+            catch {
+                print(error)
+            }
+            
         }
         
         task.resume()
     }
     
-    func FindClosestBikeNetwork(networks: NSDictionary, lat : Double, long: Double) -> (String?) {
-        let networkArray = networks["networks"] as! NSArray
-        let myLocation = CLLocation(latitude: lat, longitude: long)
-        var closest = 1000000.0
-        var closestBikeNetwork = String()
+    func handleClientError(error value: Error) -> Void
+    {
+    }
     
-        for network in networkArray {
-            let networkDictionary = network as! NSDictionary
-            let locationDictionary = networkDictionary["location"]  as! NSDictionary
-            let locLng = locationDictionary.value(forKey: "longitude") as! Double
-            let locLat = locationDictionary.value(forKey: "latitude") as! Double
-            let networkLocation = CLLocation(latitude: locLat, longitude: locLng)
-            let distance = networkLocation.distance(from: myLocation)
+    func handleServerError(response value: URLResponse?) -> Void
+    {
+    }
+    
+    
+    
+    
+    func FindClosestBikeNetwork(networks: [String:Network]?, location: CLLocation) -> (String?) {
+        
+        var closestBikeNetwork : String?
+        /*
+        if let networkArray = networks["networks"]
+        {
+            if let forced = networkArray as! NSArray
+            var closest = 1000000.0
             
-            if (distance < closest)
-            {
-                closestBikeNetwork = networkDictionary["href"] as! String
-                closest = distance
+        
+            for network in networkArray as NSArray {
+                let networkDictionary = network as! NSDictionary
+                let locationDictionary = networkDictionary["location"]  as! NSDictionary
+                let locLng = locationDictionary.value(forKey: "longitude") as! Double
+                let locLat = locationDictionary.value(forKey: "latitude") as! Double
+                let networkLocation = CLLocation(latitude: locLat, longitude: locLng)
+                let distance = networkLocation.distance(from: location)
+                
+                if (distance < closest)
+                {
+                    closestBikeNetwork = networkDictionary["href"] as! String
+                    closest = distance
+                }
+                
             }
-            
         }
+ */
         
         return closestBikeNetwork
     }

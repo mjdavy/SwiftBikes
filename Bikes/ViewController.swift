@@ -87,13 +87,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if (!locationEstablished)
         {
             let currentLocation = locations.last!
-            let lat = currentLocation.coordinate.latitude
-            let long = currentLocation.coordinate.longitude
+            
             centerMapOnLocation(location: currentLocation)
             let url = URL(string:self.baseUrl + "/v2/networks")!
             bikeNetworks.startLoad(url: url, completionHandler: {(allNetworks) in
                 if (allNetworks != nil) {
-                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks!!, lat: lat, long: long)!
+                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks!, location: currentLocation)!
                     self.addBikeLocationsToMap(url: URL(string:self.baseUrl + myNetwork)!)
                 }
             })
