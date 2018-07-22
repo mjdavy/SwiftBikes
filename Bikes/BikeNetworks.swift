@@ -88,33 +88,20 @@ class BikeNetworks {
     {
     }
     
-    func FindClosestBikeNetwork(networks: Networks, location: CLLocation) -> (String?) {
+    func FindClosestBikeNetwork(networks: Networks?, location: CLLocation) -> (String?) {
         
         var closestBikeNetwork : String?
-        /*
-        if let networkArray = networks["networks"]
-        {
-            if let forced = networkArray as! NSArray
-            var closest = 1000000.0
-            
         
-            for network in networkArray as NSArray {
-                let networkDictionary = network as! NSDictionary
-                let locationDictionary = networkDictionary["location"]  as! NSDictionary
-                let locLng = locationDictionary.value(forKey: "longitude") as! Double
-                let locLat = locationDictionary.value(forKey: "latitude") as! Double
-                let networkLocation = CLLocation(latitude: locLat, longitude: locLng)
+        if let networkArray = networks?.networks
+        {
+            let initialValue = (100000000.0,href:String())
+            let result = networkArray.reduce(initialValue, {(result, network) -> (Double,String) in
+                let networkLocation = CLLocation(latitude: network.location.latitude, longitude: network.location.longitude)
                 let distance = networkLocation.distance(from: location)
-                
-                if (distance < closest)
-                {
-                    closestBikeNetwork = networkDictionary["href"] as! String
-                    closest = distance
-                }
-                
-            }
+                return distance < result.0 ? (distance, network.href) : result
+            })
+            closestBikeNetwork = result.1
         }
- */
         
         return closestBikeNetwork
     }
