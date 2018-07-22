@@ -16,6 +16,7 @@
 		4014BC8F20F4F906008228A4 /* BikesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC8E20F4F906008228A4 /* BikesUITests.swift */; };
 		4014BC9D20F7A570008228A4 /* BikeNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC9C20F7A570008228A4 /* BikeNetworks.swift */; };
 		4014BCA020F7C28C008228A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4014BC9F20F7C28C008228A4 /* MapKit.framework */; };
+		8DEB09A92104D29E00B84904 /* StationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB09A82104D29E00B84904 /* StationPin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		4014BC9020F4F906008228A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4014BC9C20F7A570008228A4 /* BikeNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeNetworks.swift; sourceTree = "<group>"; };
 		4014BC9F20F7C28C008228A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8DEB09A82104D29E00B84904 /* StationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				4014BC6E20F4F904008228A4 /* AppDelegate.swift */,
 				4014BC7020F4F904008228A4 /* ViewController.swift */,
+				8DEB09A82104D29E00B84904 /* StationPin.swift */,
 				4014BC7220F4F904008228A4 /* Main.storyboard */,
 				4014BC7520F4F905008228A4 /* Assets.xcassets */,
 				4014BC7720F4F905008228A4 /* LaunchScreen.storyboard */,
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DEB09A92104D29E00B84904 /* StationPin.swift in Sources */,
 				4014BC9D20F7A570008228A4 /* BikeNetworks.swift in Sources */,
 				4014BC7120F4F904008228A4 /* ViewController.swift in Sources */,
 				4014BC6F20F4F904008228A4 /* AppDelegate.swift in Sources */,

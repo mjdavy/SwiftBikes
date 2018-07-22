@@ -14,7 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let baseUrl = "https://api.citybik.es"
     let bikeNetworks = BikeNetworks()
     let locationManager = CLLocationManager()
-    let regionRadius: CLLocationDistance = 1000
+    let regionRadius: CLLocationDistance = 10000
     var locationEstablished = false
     
     @IBOutlet weak var mapView: MKMapView!
@@ -132,13 +132,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func addBikeLocationsToMap(url: URL)
     {
-        /*
-        bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork) in
-            if (bikeNetwork != nil) {
-               
+        
+        bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork : [String:Network]?) in
+            if let myNetwork = bikeNetwork?["network"],
+                let myStations = myNetwork.stations {
+                
+                DispatchQueue.main.async {
+                    for station in myStations {
+                        let stationPin = StationPin(station: station)
+                        self.mapView.addAnnotation(stationPin)
+                    }
+                   
+                    let networkLocation = CLLocation(latitude: (myNetwork.location.latitude), longitude: (myNetwork.location.longitude))
+                    self.centerMapOnLocation(location: networkLocation)
+                }
             }
         })
-         */
     }
 
 }

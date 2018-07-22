@@ -28,14 +28,14 @@ struct Network : Codable {
         let empty_slots : Int
         
         struct Extra : Codable {
-            let address: String
+            let address: String?
             let last_updated: Int
             let renting: Int
             let returning: Int
             let uid: String
         }
         let extra: Extra?
-        let free_bikes: String
+        let free_bikes: Int
         let id: String
         let latitude: Double
         let longitude: Double
@@ -67,9 +67,14 @@ class BikeNetworks {
             }
             
             let jsonDecoder = JSONDecoder()
-            let result = try? jsonDecoder.decode(T.self, from: data!)
-            print(result ?? "no bike data")
-            completionHandler(result)
+            do {
+                let result = try jsonDecoder.decode(T.self, from: data!)
+                completionHandler(result)
+            }
+            catch
+            {
+                print(error)
+            }
         }
         
         task.resume()
@@ -86,6 +91,10 @@ class BikeNetworks {
     
     func handleServerError(response value: URLResponse?) -> Void
     {
+        if let httpResponse = value as! HTTPURLResponse? {
+            print("Api call failed with resonse code: ", httpResponse)
+        }
+        print("unknown server error")
     }
     
     func FindClosestBikeNetwork(networks: Networks?, location: CLLocation) -> (String?) {
