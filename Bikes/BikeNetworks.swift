@@ -9,33 +9,51 @@
 import Foundation
 import MapKit
 
-
 struct Network : Codable {
-    let company : [String]
+    let company : [String]?
     let href : String
     let id: String
-    let location : Location
     let name : String
-}
-
-struct Location : Codable {
-    let city : String
-    let country : String
-    let latitude : Double
-    let longitude : Double
+    let gbfs_href : String?
+    
+    struct Location : Codable {
+        let city : String
+        let country : String
+        let latitude : Double
+        let longitude : Double
+    }
+    let location : Location
+    
+    struct Station : Codable {
+        let empty_slots : Int
+        
+        struct Extra : Codable {
+            let address: String
+            let last_updated: Int
+            let renting: Int
+            let returning: Int
+            let uid: String
+        }
+        let extra: Extra?
+        let free_bikes: String
+        let id: String
+        let latitude: Double
+        let longitude: Double
+        let name: String
+        let timestamp: String
+    }
+    let stations: [Station]?
 }
 
 struct Networks : Codable {
     let networks: [Network]
 }
 
-
-
 class BikeNetworks {
 
-    func startLoad(url: URL, completionHandler: @escaping ([String:Network]?) -> Void) {
+    func startLoad<T: Decodable>(url: URL, completionHandler: @escaping (T?) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             
             if let error = error {
                 self.handleClientError(error: error)
@@ -48,29 +66,18 @@ class BikeNetworks {
                     return
             }
             
-            
-            if let string = String(data: data!, encoding: .utf8)
-            {
-                print(string)
-            }
-            
-            let deser = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-            print(deser!)
-            
-            
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                let result = try jsonDecoder.decode([String:Network].self, from: data!)
-                completionHandler(result)
-            }
-            catch {
-                print(error)
-            }
-            
+            let result = try? jsonDecoder.decode(T.self, from: data!)
+            print(result ?? "no bike data")
+            completionHandler(result)
         }
         
         task.resume()
+    }
+    
+    func getDataFromEndPoint(endPoint: URL)
+    {
+        
     }
     
     func handleClientError(error value: Error) -> Void
@@ -81,10 +88,7 @@ class BikeNetworks {
     {
     }
     
-    
-    
-    
-    func FindClosestBikeNetwork(networks: [String:Network]?, location: CLLocation) -> (String?) {
+    func FindClosestBikeNetwork(networks: Networks, location: CLLocation) -> (String?) {
         
         var closestBikeNetwork : String?
         /*

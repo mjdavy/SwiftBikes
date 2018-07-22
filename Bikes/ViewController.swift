@@ -90,9 +90,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             centerMapOnLocation(location: currentLocation)
             let url = URL(string:self.baseUrl + "/v2/networks")!
-            bikeNetworks.startLoad(url: url, completionHandler: {(allNetworks) in
-                if (allNetworks != nil) {
-                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks!, location: currentLocation)!
+            
+            bikeNetworks.startLoad(url: url, completionHandler: {(result : Networks?) in
+                if let allNetworks = result,
+                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: currentLocation)
+                {
                     self.addBikeLocationsToMap(url: URL(string:self.baseUrl + myNetwork)!)
                 }
             })
@@ -130,11 +132,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func addBikeLocationsToMap(url: URL)
     {
+        /*
         bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork) in
             if (bikeNetwork != nil) {
                
             }
         })
+         */
     }
 
 }
