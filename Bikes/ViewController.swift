@@ -93,8 +93,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if (!locationEstablished)
         {
             let currentLocation = locations.last!
-            
-            centerMapOnLocation(location: currentLocation)
+        
             let url = URL(string:self.baseUrl + "/v2/networks")!
             
             bikeNetworks.startLoad(url: url, completionHandler: {(result : Networks?) in
@@ -154,6 +153,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 }
             }
         })
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        let location = view.annotation as! StationPin
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking]
+        location.mapItem().openInMaps(launchOptions: launchOptions)
     }
     
 }
