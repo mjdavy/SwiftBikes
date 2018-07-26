@@ -25,6 +25,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         enableLocationServices()
         mapView.showsUserLocation = true
         myLocationButton.addTarget(self, action: #selector(ViewController.centerMapOnUserButtonClicked), for:.touchUpInside)
+        mapView.register(StationPinView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         startReceivingLocationChanges()
     }
 
@@ -166,6 +168,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 extension ViewController: MKMapViewDelegate {
     // 1
+    /*
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // 2
         guard let annotation = annotation as? StationPin else { return nil }
@@ -186,6 +189,7 @@ extension ViewController: MKMapViewDelegate {
         }
         return view
     }
+ */
 }
 
 

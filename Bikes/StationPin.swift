@@ -13,22 +13,36 @@ import Contacts
 class StationPin: NSObject, MKAnnotation {
     
     let title: String?
-    let name: String?
     let coordinate: CLLocationCoordinate2D
     let freeBikes: Int
     let freeSlots: Int
+    let percentFreeBikes : Int
+    
+    var markerTintColor: UIColor  {
+        if freeBikes == 0 {
+            return .red
+        }
+        
+        else if freeSlots == 0 {
+            return .green
+        }
+        
+        else {
+            return .blue
+        }
+    }
     
     init(station: Network.Station) {
-        title = "Bikes: \(station.free_bikes) Docks: \(station.empty_slots)"
-        name = station.name
+        title = station.name
         freeBikes = station.free_bikes
         freeSlots = station.empty_slots
+        percentFreeBikes = Int(Double(freeBikes) / Double(freeSlots + freeBikes) * 100)
         coordinate = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
         super.init()
     }
     
     var subtitle: String? {
-        return name
+        return "Bikes: \(self.freeBikes) Docks: \(self.freeSlots)"
     }
     
     // Annotation right callout accessory opens this mapItem in Maps app
@@ -36,7 +50,7 @@ class StationPin: NSObject, MKAnnotation {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = name
+        mapItem.name = title
         return mapItem
     }
 }
