@@ -18,11 +18,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var locationEstablished = false
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myLocationButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         enableLocationServices()
         mapView.showsUserLocation = true
+        myLocationButton.addTarget(self, action: #selector(ViewController.centerMapOnUserButtonClicked), for:.touchUpInside)
         startReceivingLocationChanges()
     }
 
@@ -30,6 +32,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func centerMapOnUserButtonClicked() {
+        mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
     }
     
     func enableLocationServices()
@@ -149,6 +155,31 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
         })
     }
-
+    
 }
+
+extension ViewController: MKMapViewDelegate {
+    // 1
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? StationPin else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
+}
+
 
