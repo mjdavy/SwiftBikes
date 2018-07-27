@@ -15,7 +15,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let bikeNetworks = BikeNetworks()
     let locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 10000
+    var timer = Timer()
     var locationEstablished = false
+    var myNetwork : String?
+    var myUrl: URL?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: UIButton!
@@ -28,6 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         mapView.register(StationPinView.self,
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         startReceivingLocationChanges()
+        startTimer()
     }
 
     override func didReceiveMemoryWarning()
@@ -38,6 +42,55 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func centerMapOnUserButtonClicked() {
         mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+    }
+    
+    func startTimer() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { (mytimer) in
+            
+            guard let url = self.myUrl else {
+                return;
+            }
+            
+            self.bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork : [String:Network]?) in
+                guard let myNetwork = bikeNetwork?["network"], let myStations = myNetwork.stations else {
+                    return
+                }
+                
+                var stationDictionary = [String:Network.Station]()
+                for station in myStations {
+                    stationDictionary[station.id] = station
+                }
+                
+                var modified = [StationPin]()
+                for annotation in self.mapView.annotations as [MKAnnotation]
+                {
+                    guard let pin = annotation as? StationPin else
+                    {
+                        continue
+                    }
+                    
+                    if let station = stationDictionary[pin.id]
+                    {
+                        if pin.freeBikes != station.free_bikes || pin.freeSlots != station.empty_slots
+                        {
+                            pin.freeBikes = station.free_bikes
+                            pin.freeSlots = station.empty_slots
+                            modified.append(pin)
+                        }
+                    }
+                }
+                
+                if modified.count > 0 {
+                    DispatchQueue.main.async {
+                        for pin in modified {
+                            self.mapView.removeAnnotation(pin)
+                            self.mapView.addAnnotation(pin)
+                        }
+                    }
+                }
+            })
+            
+        })
     }
     
     func enableLocationServices()
@@ -100,9 +153,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             bikeNetworks.startLoad(url: url, completionHandler: {(result : Networks?) in
                 if let allNetworks = result,
-                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: currentLocation)
+                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: currentLocation),
+                    let myUrl = URL(string:self.baseUrl + myNetwork)
                 {
-                    self.addBikeLocationsToMap(url: URL(string:self.baseUrl + myNetwork)!)
+                    self.addBikeLocationsToMap(url: myUrl)
+                    self.myUrl = myUrl
+                    self.myNetwork = myNetwork
                 }
             })
         }
