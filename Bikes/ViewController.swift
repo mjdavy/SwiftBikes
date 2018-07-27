@@ -139,7 +139,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func addBikeLocationsToMap(url: URL)
     {
-        
         bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork : [String:Network]?) in
             if let myNetwork = bikeNetwork?["network"],
                 let myStations = myNetwork.stations {
