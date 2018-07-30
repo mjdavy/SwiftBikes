@@ -24,19 +24,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="5PX-56-2RA"/>
                                 </connections>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SLd-D4-cHL">
-                                <rect key="frame" x="335" y="678" width="30" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SLd-D4-cHL">
+                                <rect key="frame" x="335" y="658" width="30" height="110"/>
                                 <subviews>
                                     <button alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-uW-jed">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <state key="normal" image="trackme"/>
                                     </button>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lL-Vg-4YE" userLabel="Nearest Bike Button">
-                                        <rect key="frame" x="0.0" y="30" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="30" height="30"/>
                                         <state key="normal" image="NearestBike"/>
                                     </button>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnC-Bx-dd9" userLabel="Nearest Dock Button">
-                                        <rect key="frame" x="0.0" y="60" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="80" width="30" height="30"/>
                                         <state key="normal" image="Dock"/>
                                     </button>
                                 </subviews>
