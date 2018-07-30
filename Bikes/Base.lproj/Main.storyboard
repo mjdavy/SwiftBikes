@@ -24,22 +24,35 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="5PX-56-2RA"/>
                                 </connections>
                             </mapView>
-                            <button alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-uW-jed">
-                                <rect key="frame" x="335" y="738" width="30" height="30"/>
-                                <state key="normal" image="trackme"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SLd-D4-cHL">
+                                <rect key="frame" x="335" y="678" width="30" height="90"/>
+                                <subviews>
+                                    <button alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-uW-jed">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <state key="normal" image="trackme"/>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lL-Vg-4YE" userLabel="Nearest Bike Button">
+                                        <rect key="frame" x="0.0" y="30" width="30" height="30"/>
+                                        <state key="normal" image="NearestBike"/>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnC-Bx-dd9" userLabel="Nearest Dock Button">
+                                        <rect key="frame" x="0.0" y="60" width="30" height="30"/>
+                                        <state key="normal" image="Dock"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6yW-ug-k6G"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xSr-uW-jed" secondAttribute="bottom" constant="10" id="A1C-QX-tCc"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GU0-g2-u8b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rmb-7L-vm5" secondAttribute="bottom" id="H4F-zi-NNL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xSr-uW-jed" secondAttribute="trailing" constant="10" id="W2K-TQ-Wtj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SLd-D4-cHL" secondAttribute="bottom" constant="10" id="XcY-jf-0a0"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Zpi-bj-phB"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="afA-H0-sgC"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fcx-r0-eUh"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jDT-7d-NTS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SLd-D4-cHL" secondAttribute="trailing" constant="10" id="tQ2-WW-OHY"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uxH-XF-lpJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -47,6 +60,8 @@
                     <connections>
                         <outlet property="mapView" destination="Rmb-7L-vm5" id="xL7-Oe-sgc"/>
                         <outlet property="myLocationButton" destination="xSr-uW-jed" id="TSF-8d-OAv"/>
+                        <outlet property="nearestBikeButton" destination="4lL-Vg-4YE" id="TFq-Lv-4cD"/>
+                        <outlet property="nearestDockButton" destination="QnC-Bx-dd9" id="p2S-0a-sik"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -55,6 +70,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Dock" width="30" height="30"/>
+        <image name="NearestBike" width="30" height="30"/>
         <image name="trackme" width="30" height="30"/>
     </resources>
 </document>

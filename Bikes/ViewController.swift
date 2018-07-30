@@ -16,15 +16,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 10000
     var locationEstablished = false
+    var currentLocation: CLLocation?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var myLocationButton: UIButton!
+    @IBOutlet weak var nearestBikeButton: UIButton!
+    @IBOutlet weak var nearestDockButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         enableLocationServices()
         mapView.showsUserLocation = true
         myLocationButton.addTarget(self, action: #selector(ViewController.centerMapOnUserButtonClicked), for:.touchUpInside)
+        nearestBikeButton.addTarget(self, action: #selector(ViewController.nearestBikeButtonClicked), for: .touchUpInside)
+        nearestDockButton.addTarget(self, action: #selector(ViewController.nearestDockButtonClicked), for: .touchUpInside)
         mapView.register(StationPinView.self,
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         startReceivingLocationChanges()
@@ -38,6 +43,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func centerMapOnUserButtonClicked() {
         mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+    }
+    
+    @objc func nearestBikeButtonClicked()
+    {
+        selectNearestPin(location: self.currentLocation) { (annotation) -> Bool in
+            if let pin = annotation as? StationPin,
+            pin.freeBikes > 0
+            {
+                return true;
+            }
+            return false
+        }
+    }
+    
+    @objc func nearestDockButtonClicked() {
+        selectNearestPin(location: self.currentLocation) { (annotation) -> Bool in
+            if let pin = annotation as? StationPin,
+                pin.freeSlots > 0
+            {
+                return true;
+            }
+            return false
+        }
+    }
+    
+    func selectNearestPin(location: CLLocation?, query: (MKAnnotation) -> Bool)
+    {
+        if let mylocation = location {
+            let matching = mapView.annotations.filter(query).sorted { (item1, item2) -> Bool in
+                let pin1 = item1 as! StationPin
+                let pin2 = item2 as! StationPin
+                let distance1 = mylocation.distance(from: CLLocation(latitude: pin1.coordinate.latitude, longitude: pin1.coordinate.longitude))
+                let distance2 = mylocation.distance(from: CLLocation(latitude: pin2.coordinate.latitude, longitude: pin2.coordinate.longitude))
+                return distance1 < distance2
+            }
+            
+            if let nearestPin = matching.first {
+                mapView.selectAnnotation(nearestPin, animated: true)
+            }
+        }
     }
     
     func enableLocationServices()
@@ -94,13 +139,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         if (!locationEstablished)
         {
-            let currentLocation = locations.last!
-        
+            self.currentLocation = locations.last!
+            
             let url = URL(string:self.baseUrl + "/v2/networks")!
             
             bikeNetworks.startLoad(url: url, completionHandler: {(result : Networks?) in
                 if let allNetworks = result,
-                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: currentLocation)
+                    let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: self.currentLocation!)
                 {
                     self.addBikeLocationsToMap(url: URL(string:self.baseUrl + myNetwork)!)
                 }
