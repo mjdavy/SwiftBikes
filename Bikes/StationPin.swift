@@ -14,9 +14,9 @@ class StationPin: NSObject, MKAnnotation {
     
     let title: String?
     let coordinate: CLLocationCoordinate2D
-    let freeBikes: Int
-    let freeSlots: Int
-    let percentFreeBikes : Int
+    var freeBikes: Int
+    var freeSlots: Int
+    let id: String
     
     var markerTintColor: UIColor  {
         if freeBikes == 0 {
@@ -33,16 +33,21 @@ class StationPin: NSObject, MKAnnotation {
     }
     
     init(station: Network.Station) {
+        id = station.id
         title = station.name
         freeBikes = station.free_bikes
         freeSlots = station.empty_slots
-        percentFreeBikes = Int(Double(freeBikes) / Double(freeSlots + freeBikes) * 100)
         coordinate = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
         super.init()
     }
     
     var subtitle: String? {
         return "Bikes: \(self.freeBikes) Docks: \(self.freeSlots)"
+    }
+    
+    func update(station: Network.Station) -> Void {
+        self.freeBikes = station.free_bikes
+        self.freeSlots = station.empty_slots
     }
     
     // Annotation right callout accessory opens this mapItem in Maps app

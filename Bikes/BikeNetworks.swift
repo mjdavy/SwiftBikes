@@ -10,11 +10,9 @@ import Foundation
 import MapKit
 
 struct Network : Codable {
-    let company : [String]?
     let href : String
     let id: String
     let name : String
-    let gbfs_href : String?
     
     struct Location : Codable {
         let city : String
@@ -26,15 +24,6 @@ struct Network : Codable {
     
     struct Station : Codable {
         let empty_slots : Int
-        
-        struct Extra : Codable {
-            let address: String?
-            let last_updated: Int
-            let renting: Int
-            let returning: Int
-            let uid: String
-        }
-        let extra: Extra?
         let free_bikes: Int
         let id: String
         let latitude: Double

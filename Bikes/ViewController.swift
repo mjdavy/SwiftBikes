@@ -15,6 +15,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let bikeNetworks = BikeNetworks()
     let locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 10000
+    var timer = Timer()
     var locationEstablished = false
     var currentLocation: CLLocation?
     
@@ -33,6 +34,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         mapView.register(StationPinView.self,
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         startReceivingLocationChanges()
+        startTimer()
     }
 
     override func didReceiveMemoryWarning()
@@ -147,7 +149,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 if let allNetworks = result,
                     let myNetwork = self.bikeNetworks.FindClosestBikeNetwork(networks: allNetworks, location: self.currentLocation!)
                 {
-                    self.addBikeLocationsToMap(url: URL(string:self.baseUrl + myNetwork)!)
+                    self.addBikeLocationsToMap(url: myUrl)
+                    self.myUrl = myUrl
+                    self.myNetwork = myNetwork
                 }
             })
         }
@@ -184,7 +188,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func addBikeLocationsToMap(url: URL)
     {
-        
         bikeNetworks.startLoad(url: url, completionHandler: {(bikeNetwork : [String:Network]?) in
             if let myNetwork = bikeNetwork?["network"],
                 let myStations = myNetwork.stations {
