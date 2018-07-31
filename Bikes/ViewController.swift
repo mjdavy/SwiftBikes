@@ -101,23 +101,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @objc func nearestBikeButtonClicked()
     {
         selectNearestPin(location: self.currentLocation) { (annotation) -> Bool in
-            if let pin = annotation as? StationPin,
-            pin.freeBikes > 0
-            {
-                return true;
+            guard let pin = annotation as? StationPin
+            else {
+                return false
             }
-            return false
+            return pin.freeBikes > 0
         }
     }
     
     @objc func nearestDockButtonClicked() {
         selectNearestPin(location: self.currentLocation) { (annotation) -> Bool in
-            if let pin = annotation as? StationPin,
-                pin.freeSlots > 0
-            {
-                return true;
+            guard let pin = annotation as? StationPin
+            else {
+                return false
             }
-            return false
+            return pin.freeSlots > 0
         }
     }
     
@@ -133,6 +131,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             if let nearestPin = matching.first {
+                mapView.deselectAnnotation(nearestPin, animated: false)
                 mapView.selectAnnotation(nearestPin, animated: true)
             }
         }
