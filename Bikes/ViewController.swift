@@ -161,6 +161,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             // Enable any of your app's location features
             //enableMyAlwaysFeatures()
             break
+        @unknown default:
+            break
         }
     }
     
@@ -183,6 +185,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 break
             
             case .notDetermined:
+            break
+        @unknown default:
             break
         }
     }
@@ -223,12 +227,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             // User has not authorized access to location information.
             return
         }
-        // Do not start services that aren't available.
-        if !CLLocationManager.locationServicesEnabled()
-        {
-            // Location services is not available.
-            return
-        }
+        
         // Configure and start the service.
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 1.0  // In meters.
@@ -238,7 +237,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func centerMapOnLocation(location: CLLocation)
     {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     

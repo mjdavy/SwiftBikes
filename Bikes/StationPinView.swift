@@ -18,7 +18,7 @@ class StationPinView: MKMarkerAnnotationView {
             calloutOffset = CGPoint(x: -5, y: 5)
             let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero,
                                                     size: CGSize(width: 30, height: 30)))
-            mapsButton.setBackgroundImage(UIImage(named: "Maps-icon"), for: UIControlState())
+            mapsButton.setBackgroundImage(UIImage(named: "Maps-icon"), for: UIControl.State())
             rightCalloutAccessoryView = mapsButton
             markerTintColor = stationPin.markerTintColor
             glyphImage = UIImage(named: "Bike")
