@@ -23,7 +23,7 @@
                                 </connections>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SLd-D4-cHL">
-                                <rect key="frame" x="335" y="658" width="30" height="110"/>
+                                <rect key="frame" x="335" y="80" width="30" height="110"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-uW-jed">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -46,7 +46,7 @@
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6yW-ug-k6G"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GU0-g2-u8b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rmb-7L-vm5" secondAttribute="bottom" id="H4F-zi-NNL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SLd-D4-cHL" secondAttribute="bottom" constant="10" id="XcY-jf-0a0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="SLd-D4-cHL" secondAttribute="top" multiplier="0.5" constant="10" id="XcY-jf-0a0"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Zpi-bj-phB"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="afA-H0-sgC"/>
                             <constraint firstItem="Rmb-7L-vm5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fcx-r0-eUh"/>
