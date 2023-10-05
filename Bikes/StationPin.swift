@@ -19,17 +19,19 @@ class StationPin: NSObject, MKAnnotation {
     let id: String
     
     var markerTintColor: UIColor  {
+        if freeBikes == 0 && freeSlots == 0 {
+            return .gray
+        }
+            
         if freeBikes == 0 {
             return .red
         }
         
-        else if freeSlots == 0 {
+        if freeSlots == 0 {
             return .green
         }
         
-        else {
-            return .blue
-        }
+        return .blue
     }
     
     init(station: Network.Station) {
