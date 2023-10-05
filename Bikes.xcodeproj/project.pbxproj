@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4014BC6B20F4F904008228A4 /* Bikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4014BC6B20F4F904008228A4 /* Swift Bikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Bikes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4014BC6E20F4F904008228A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4014BC7020F4F904008228A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4014BC7320F4F904008228A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		4014BC6C20F4F904008228A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4014BC6B20F4F904008228A4 /* Bikes.app */,
+				4014BC6B20F4F904008228A4 /* Swift Bikes.app */,
 				4014BC7F20F4F906008228A4 /* BikesTests.xctest */,
 				4014BC8A20F4F906008228A4 /* BikesUITests.xctest */,
 			);
@@ -149,9 +149,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4014BC6A20F4F904008228A4 /* Bikes */ = {
+		4014BC6A20F4F904008228A4 /* Swift Bikes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4014BC9320F4F906008228A4 /* Build configuration list for PBXNativeTarget "Bikes" */;
+			buildConfigurationList = 4014BC9320F4F906008228A4 /* Build configuration list for PBXNativeTarget "Swift Bikes" */;
 			buildPhases = (
 				4014BC6720F4F904008228A4 /* Sources */,
 				4014BC6820F4F904008228A4 /* Frameworks */,
@@ -161,9 +161,9 @@
 			);
 			dependencies = (
 			);
-			name = Bikes;
+			name = "Swift Bikes";
 			productName = Bikes;
-			productReference = 4014BC6B20F4F904008228A4 /* Bikes.app */;
+			productReference = 4014BC6B20F4F904008228A4 /* Swift Bikes.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4014BC7E20F4F906008228A4 /* BikesTests */ = {
@@ -247,7 +247,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4014BC6A20F4F904008228A4 /* Bikes */,
+				4014BC6A20F4F904008228A4 /* Swift Bikes */,
 				4014BC7E20F4F906008228A4 /* BikesTests */,
 				4014BC8920F4F906008228A4 /* BikesUITests */,
 			);
@@ -315,12 +315,12 @@
 /* Begin PBXTargetDependency section */
 		4014BC8120F4F906008228A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4014BC6A20F4F904008228A4 /* Bikes */;
+			target = 4014BC6A20F4F904008228A4 /* Swift Bikes */;
 			targetProxy = 4014BC8020F4F906008228A4 /* PBXContainerItemProxy */;
 		};
 		4014BC8C20F4F906008228A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4014BC6A20F4F904008228A4 /* Bikes */;
+			target = 4014BC6A20F4F904008228A4 /* Swift Bikes */;
 			targetProxy = 4014BC8B20F4F906008228A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -601,7 +601,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4014BC9320F4F906008228A4 /* Build configuration list for PBXNativeTarget "Bikes" */ = {
+		4014BC9320F4F906008228A4 /* Build configuration list for PBXNativeTarget "Swift Bikes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4014BC9420F4F906008228A4 /* Debug */,
