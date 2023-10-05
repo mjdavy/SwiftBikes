@@ -29,14 +29,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         enableLocationServices()
-        mapView.showsUserLocation = true
-        myLocationButton.addTarget(self, action: #selector(ViewController.centerMapOnUserButtonClicked), for:.touchUpInside)
-        nearestBikeButton.addTarget(self, action: #selector(ViewController.nearestBikeButtonClicked), for: .touchUpInside)
-        nearestDockButton.addTarget(self, action: #selector(ViewController.nearestDockButtonClicked), for: .touchUpInside)
-        mapView.register(StationPinView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        startReceivingLocationChanges()
-        startTimer()
     }
 
     override func didReceiveMemoryWarning()
@@ -137,6 +129,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func enableLocationBasedFeatures()
+    {
+        mapView.showsUserLocation = true
+        myLocationButton.addTarget(self, action: #selector(ViewController.centerMapOnUserButtonClicked), for:.touchUpInside)
+        nearestBikeButton.addTarget(self, action: #selector(ViewController.nearestBikeButtonClicked), for: .touchUpInside)
+        nearestDockButton.addTarget(self, action: #selector(ViewController.nearestDockButtonClicked), for: .touchUpInside)
+        mapView.register(StationPinView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        startReceivingLocationChanges()
+        startTimer()
+    }
+    
     func enableLocationServices()
     {
         locationManager.delegate = self
@@ -154,34 +158,51 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
         case .authorizedWhenInUse:
             // Enable basic location features
-            //enableMyWhenInUseFeatures()
+            enableLocationBasedFeatures()
             break
             
         case .authorizedAlways:
             // Enable any of your app's location features
-            //enableMyAlwaysFeatures()
+            enableLocationBasedFeatures()
             break
         @unknown default:
             break
         }
     }
     
+    func requireLocationBasedFeatures()
+    {
+        let alertController = UIAlertController(title: "Location Access Disabled", message: "This app requires location services to work. Please enable location services in Settings.", preferredStyle: .alert)
+                    
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openSettingsAction = UIAlertAction(title: "Settings", style: .default) { (action) in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(openSettingsAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
         switch status {
             case .restricted, .denied:
-                // Disable your app's location features
-                //disableMyLocationBasedFeatures()
+                // Encourage the user to change location settings
+                requireLocationBasedFeatures()
                 break
             
             case .authorizedWhenInUse:
                 // Enable only your app's when-in-use features.
-                //enableMyWhenInUseFeatures()
+                enableLocationBasedFeatures()
                 break
             
             case .authorizedAlways:
                 // Enable any of your app's location services.
-                //enableMyAlwaysFeatures()
+                enableLocationBasedFeatures()
                 break
             
             case .notDetermined:
