@@ -137,8 +137,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         nearestDockButton.addTarget(self, action: #selector(ViewController.nearestDockButtonClicked), for: .touchUpInside)
         mapView.register(StationPinView.self,
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        addInfoButton()
         startReceivingLocationChanges()
         startTimer()
+    }
+    
+    func addInfoButton()
+    {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(openInfoPage), for: .touchUpInside)
+        mapView.addSubview(infoButton)
+
+        // Position the button in the bottom right corner of the map view
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoButton.bottomAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            infoButton.trailingAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    @objc func openInfoPage() {
+        guard let url = URL(string: "https://citybik.es") else { return }
+        UIApplication.shared.open(url)
     }
     
     func enableLocationServices()
