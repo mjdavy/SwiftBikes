@@ -6,3 +6,6 @@ xcuserdata/
 *.xcuserstate
 DerivedData/
 build/
+
+# Playwright MCP scratch output (screenshots, snapshots, downloads)
+.playwright-mcp/
