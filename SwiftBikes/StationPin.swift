@@ -1,60 +1,78 @@
 //
 //  StationPin.swift
-//  Bikes
+//  Swift Bikes
 //
 //  Created by Martin Davy on 7/22/18.
 //  Copyright © 2018 Martin Davy. All rights reserved.
 //
 
-import Foundation
-import MapKit
 import Contacts
+import MapKit
+import UIKit
 
-class StationPin: NSObject, MKAnnotation {
-    
+/// Map annotation for one bike station. Bike and dock counts change as the station data refreshes.
+final class StationPin: NSObject, MKAnnotation {
+
+    let id: String
     let title: String?
     let coordinate: CLLocationCoordinate2D
-    var freeBikes: Int
-    var freeSlots: Int
-    let id: String
-    
-    var markerTintColor: UIColor  {
-        if freeBikes == 0 && freeSlots == 0 {
-            return .gray
-        }
-            
-        if freeBikes == 0 {
-            return .red
-        }
-        
-        if freeSlots == 0 {
-            return .green
-        }
-        
-        return .blue
-    }
-    
+    private(set) var freeBikes: Int
+    private(set) var freeSlots: Int
+
     init(station: Network.Station) {
         id = station.id
         title = station.name
-        freeBikes = station.free_bikes
-        freeSlots = station.empty_slots
+        freeBikes = station.freeBikes
+        freeSlots = station.emptySlots
         coordinate = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
         super.init()
     }
-    
+
     var subtitle: String? {
-        return "Bikes: \(self.freeBikes) Docks: \(self.freeSlots)"
+        "Bikes: \(freeBikes) Docks: \(freeSlots)"
     }
-    
-    func update(station: Network.Station) -> Void {
-        self.freeBikes = station.free_bikes
-        self.freeSlots = station.empty_slots
+
+    /// Gray when empty and full at once, red with no bikes, green with no docks, otherwise blue.
+    var markerTintColor: UIColor {
+        switch (freeBikes, freeSlots) {
+        case (0, 0): .gray
+        case (0, _): .red
+        case (_, 0): .green
+        default: .blue
+        }
     }
-    
-    // Annotation right callout accessory opens this mapItem in Maps app
+
+    var location: CLLocation {
+        CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+
+    /// Copies the latest counts from `station`. Returns `true` if either count changed.
+    @discardableResult
+    func update(from station: Network.Station) -> Bool {
+        guard freeBikes != station.freeBikes || freeSlots != station.emptySlots else {
+            return false
+        }
+        freeBikes = station.freeBikes
+        freeSlots = station.emptySlots
+        return true
+    }
+
+    /// Updates each pin from the station with the same id and returns the pins whose counts changed.
+    static func applyUpdates(from stations: [Network.Station], to pins: [StationPin]) -> [StationPin] {
+        let stationsByID = Dictionary(stations.map { ($0.id, $0) }, uniquingKeysWith: { _, latest in latest })
+        var changed: [StationPin] = []
+        for pin in pins {
+            if let station = stationsByID[pin.id], pin.update(from: station) {
+                changed.append(pin)
+            }
+        }
+        return changed
+    }
+
+    /// The item opened in Maps from the callout's accessory button. Maps shows the
+    /// bike/dock counts where it would normally show the street address.
     func mapItem() -> MKMapItem {
-        let addressDict = [CNPostalAddressStreetKey: subtitle!]
+        let addressDict = [CNPostalAddressStreetKey: subtitle ?? ""]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = title

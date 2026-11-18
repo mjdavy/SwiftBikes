@@ -1,6 +1,6 @@
 //
 //  BikesUITests.swift
-//  BikesUITests
+//  SwiftBikesUITests
 //
 //  Created by Martin Davy on 7/10/18.
 //  Copyright © 2018 Martin Davy. All rights reserved.
@@ -8,29 +8,22 @@
 
 import XCTest
 
-class BikesUITests: XCTestCase {
-        
-    override func setUp() {
-        super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+@MainActor
+final class BikesUITests: XCTestCase {
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    override func setUp() async throws {
+        continueAfterFailure = false
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+
+    /// Guards against the app failing to present a window at launch (for example a
+    /// missing UIScene configuration, which newer SDKs treat as a launch failure).
+    func testLaunchShowsMapAndControls() {
+        let app = XCUIApplication()
+        app.launch()
+
+        XCTAssertTrue(app.maps.firstMatch.waitForExistence(timeout: 15))
+        XCTAssertTrue(app.buttons["Nearest available bike"].exists)
+        XCTAssertTrue(app.buttons["Nearest available dock"].exists)
+        XCTAssertTrue(app.buttons["Follow my location"].exists)
     }
-    
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
 }

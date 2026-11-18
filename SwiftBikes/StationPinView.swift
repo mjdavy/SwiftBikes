@@ -1,27 +1,40 @@
 //
 //  StationPinView.swift
-//  Bikes
+//  Swift Bikes
 //
 //  Created by Martin Davy on 7/26/18.
 //  Copyright © 2018 Martin Davy. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
-class StationPinView: MKMarkerAnnotationView {
-    override var annotation: MKAnnotation? {
-        willSet {
-            // 1
-            guard let stationPin = newValue as? StationPin else { return }
-            canShowCallout = true
-            calloutOffset = CGPoint(x: -5, y: 5)
-            let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero,
-                                                    size: CGSize(width: 30, height: 30)))
-            mapsButton.setBackgroundImage(UIImage(named: "Maps-icon"), for: UIControl.State())
-            rightCalloutAccessoryView = mapsButton
-            markerTintColor = stationPin.markerTintColor
-            glyphImage = UIImage(named: "Bike")
-        }
+/// Bike-glyph marker whose colour reflects availability. Its callout shows the
+/// station name and counts, with a Maps button for walking directions.
+final class StationPinView: MKMarkerAnnotationView {
+
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        configure()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+
+    override func prepareForDisplay() {
+        super.prepareForDisplay()
+        markerTintColor = (annotation as? StationPin)?.markerTintColor
+    }
+
+    private func configure() {
+        canShowCallout = true
+        calloutOffset = CGPoint(x: -5, y: 5)
+        glyphImage = UIImage(named: "Bike")
+
+        let mapsButton = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        mapsButton.setBackgroundImage(UIImage(named: "Maps-icon"), for: .normal)
+        mapsButton.accessibilityLabel = "Walking directions in Maps"
+        rightCalloutAccessoryView = mapsButton
     }
 }

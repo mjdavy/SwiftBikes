@@ -8,16 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		4014BC6F20F4F904008228A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC6E20F4F904008228A4 /* AppDelegate.swift */; };
-		4014BC7120F4F904008228A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC7020F4F904008228A4 /* ViewController.swift */; };
+		4014BC7120F4F904008228A4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC7020F4F904008228A4 /* MapViewController.swift */; };
 		4014BC7420F4F904008228A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4014BC7220F4F904008228A4 /* Main.storyboard */; };
 		4014BC7620F4F905008228A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4014BC7520F4F905008228A4 /* Assets.xcassets */; };
 		4014BC7920F4F905008228A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4014BC7720F4F905008228A4 /* LaunchScreen.storyboard */; };
 		4014BC8420F4F906008228A4 /* BikesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC8320F4F906008228A4 /* BikesTests.swift */; };
 		4014BC8F20F4F906008228A4 /* BikesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC8E20F4F906008228A4 /* BikesUITests.swift */; };
-		4014BC9D20F7A570008228A4 /* BikeNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC9C20F7A570008228A4 /* BikeNetworks.swift */; };
+		4014BC9D20F7A570008228A4 /* CityBikesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4014BC9C20F7A570008228A4 /* CityBikesClient.swift */; };
 		4014BCA020F7C28C008228A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4014BC9F20F7C28C008228A4 /* MapKit.framework */; };
 		8DEB09A92104D29E00B84904 /* StationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB09A82104D29E00B84904 /* StationPin.swift */; };
 		8DEB09AB210A26B400B84904 /* StationPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB09AA210A26B400B84904 /* StationPinView.swift */; };
+		8DEB0B00012B000000000000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB0A00012B000000000000 /* SceneDelegate.swift */; };
+		8DEB0B00022B000000000000 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB0A00022B000000000000 /* Network.swift */; };
+		8DEB0B00032B000000000000 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB0A00032B000000000000 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +43,7 @@
 /* Begin PBXFileReference section */
 		4014BC6B20F4F904008228A4 /* Swift Bikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Bikes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4014BC6E20F4F904008228A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4014BC7020F4F904008228A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4014BC7020F4F904008228A4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4014BC7320F4F904008228A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4014BC7520F4F905008228A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4014BC7820F4F905008228A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,10 +54,13 @@
 		4014BC8A20F4F906008228A4 /* BikesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BikesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4014BC8E20F4F906008228A4 /* BikesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikesUITests.swift; sourceTree = "<group>"; };
 		4014BC9020F4F906008228A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4014BC9C20F7A570008228A4 /* BikeNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeNetworks.swift; sourceTree = "<group>"; };
+		4014BC9C20F7A570008228A4 /* CityBikesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityBikesClient.swift; sourceTree = "<group>"; };
 		4014BC9F20F7C28C008228A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8DEB09A82104D29E00B84904 /* StationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPin.swift; sourceTree = "<group>"; };
 		8DEB09AA210A26B400B84904 /* StationPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPinView.swift; sourceTree = "<group>"; };
+		8DEB0A00012B000000000000 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8DEB0A00022B000000000000 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		8DEB0A00032B000000000000 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,15 +113,18 @@
 		4014BC6D20F4F904008228A4 /* SwiftBikes */ = {
 			isa = PBXGroup;
 			children = (
+				8DEB0A00032B000000000000 /* PrivacyInfo.xcprivacy */,
+				8DEB0A00022B000000000000 /* Network.swift */,
+				8DEB0A00012B000000000000 /* SceneDelegate.swift */,
 				4014BC6E20F4F904008228A4 /* AppDelegate.swift */,
-				4014BC7020F4F904008228A4 /* ViewController.swift */,
+				4014BC7020F4F904008228A4 /* MapViewController.swift */,
 				8DEB09A82104D29E00B84904 /* StationPin.swift */,
 				8DEB09AA210A26B400B84904 /* StationPinView.swift */,
 				4014BC7220F4F904008228A4 /* Main.storyboard */,
 				4014BC7520F4F905008228A4 /* Assets.xcassets */,
 				4014BC7720F4F905008228A4 /* LaunchScreen.storyboard */,
 				4014BC7A20F4F905008228A4 /* Info.plist */,
-				4014BC9C20F7A570008228A4 /* BikeNetworks.swift */,
+				4014BC9C20F7A570008228A4 /* CityBikesClient.swift */,
 			);
 			path = SwiftBikes;
 			sourceTree = "<group>";
@@ -259,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DEB0B00032B000000000000 /* PrivacyInfo.xcprivacy in Resources */,
 				4014BC7920F4F905008228A4 /* LaunchScreen.storyboard in Resources */,
 				4014BC7620F4F905008228A4 /* Assets.xcassets in Resources */,
 				4014BC7420F4F904008228A4 /* Main.storyboard in Resources */,
@@ -286,10 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DEB0B00022B000000000000 /* Network.swift in Sources */,
+				8DEB0B00012B000000000000 /* SceneDelegate.swift in Sources */,
 				8DEB09A92104D29E00B84904 /* StationPin.swift in Sources */,
 				8DEB09AB210A26B400B84904 /* StationPinView.swift in Sources */,
-				4014BC9D20F7A570008228A4 /* BikeNetworks.swift in Sources */,
-				4014BC7120F4F904008228A4 /* ViewController.swift in Sources */,
+				4014BC9D20F7A570008228A4 /* CityBikesClient.swift in Sources */,
+				4014BC7120F4F904008228A4 /* MapViewController.swift in Sources */,
 				4014BC6F20F4F904008228A4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -456,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -472,14 +484,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
 				INFOPLIST_FILE = SwiftBikes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.ancientgeeks.bikes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -491,14 +505,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
 				INFOPLIST_FILE = SwiftBikes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.ancientgeeks.bikes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -510,8 +526,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
-				INFOPLIST_FILE = BikesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_FILE = SwiftBikesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -519,9 +535,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.runmeover.BikesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bikes.app/Bikes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swift Bikes.app/Swift Bikes";
 			};
 			name = Debug;
 		};
@@ -532,8 +548,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
-				INFOPLIST_FILE = BikesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_FILE = SwiftBikesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,9 +557,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.runmeover.BikesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bikes.app/Bikes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swift Bikes.app/Swift Bikes";
 			};
 			name = Release;
 		};
@@ -553,8 +569,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
-				INFOPLIST_FILE = BikesUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_FILE = SwiftBikesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -562,9 +578,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.runmeover.BikesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bikes;
+				TEST_TARGET_NAME = "Swift Bikes";
 			};
 			name = Debug;
 		};
@@ -574,8 +590,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNL56T2U8R;
-				INFOPLIST_FILE = BikesUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_FILE = SwiftBikesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,9 +599,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.runmeover.BikesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bikes;
+				TEST_TARGET_NAME = "Swift Bikes";
 			};
 			name = Release;
 		};
